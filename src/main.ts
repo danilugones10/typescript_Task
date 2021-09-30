@@ -41,6 +41,7 @@ const TASK=[
     },
 ];
 const taskList=document.querySelector('#taskList');
+const modal=document.querySelector('.modal');
 
 function crearHTML(taskElement) {
     return `
@@ -68,7 +69,29 @@ function listarHTML(tasks) {
         // </li>
         // `
     }
+    borrarTarea();
 };
+
+function borrarTarea() {
+    const botonBorrar=document.querySelectorAll('.btn-delete');
+    const arrayBorrar=Array.from(botonBorrar);
+    const botonSI=document.querySelector('#botonSi');
+    const botonNo=document.querySelector('#botonNo');
+
+    for (const element of arrayBorrar) {
+        element.addEventListener('click', ()=>{
+            modal.className="modal open";
+            botonSI.addEventListener('click', ()=>{
+                modal.className="modal";
+                element.parentElement.remove();
+            })
+            botonNo.addEventListener('click', ()=>{
+                modal.className="modal";
+            })
+        })
+    }
+}
+
 
 listarHTML(TASK);
 TASK.slice(0,1);
